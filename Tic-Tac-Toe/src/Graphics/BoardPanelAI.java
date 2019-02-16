@@ -9,6 +9,7 @@ import Graphics.OnePlayerFrame;
 import Main.Frame;
 import Main.Main;
 import Main.SQL;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -26,6 +27,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -56,6 +58,7 @@ public class BoardPanelAI extends JPanel {
     String winner = null;
     SQL sql;
     JPanel panel;
+    InformationPanelAI ip;
 
     static {
         firstPlayer = true;
@@ -70,8 +73,9 @@ public class BoardPanelAI extends JPanel {
 
             @Override
             public void windowClosed(WindowEvent e) {
-                add((Component)new InformationPanelAI(), "North");
-                add((Component)panel, "South");
+            	ip = new InformationPanelAI();
+                add(ip, "North");
+                add(panel, "South");
                 createBoard();
             }
         });
@@ -449,19 +453,19 @@ public class BoardPanelAI extends JPanel {
 
     public void win() {
         sql = new SQL();
-        sql.insertGame("One player", String.valueOf(boardSize) + "x" + boardSize, InformationPanelAI.player1, InformationPanelAI.player2, "Victory", winner, Float.parseFloat(InformationPanelAI.timeCount));
+        sql.insertGame("One player", String.valueOf(boardSize) + "x" + boardSize, InformationPanelAI.player1, InformationPanelAI.player2, "Victory", winner, Float.parseFloat(ip.getTimeCount()));
         sql.closeConnection();
         turn = 0;
-        int i = JOptionPane.showConfirmDialog(Main.frame, String.valueOf(winner) + " Victory! Time " + Float.parseFloat(InformationPanelAI.timeCount), "Game is finished", -1, 1);
+        int i = JOptionPane.showConfirmDialog(Main.frame, String.valueOf(winner) + " Victory! Time " + Float.parseFloat(ip.getTimeCount()), "Game is finished", -1, 1);
         closeGame(i);
     }
 
     public void draw() {
         sql = new SQL();
-        sql.insertGame("One player", String.valueOf(boardSize) + "x" + boardSize, InformationPanelAI.player1, InformationPanelAI.player2, "Draw", null, Float.parseFloat(InformationPanelAI.timeCount));
+        sql.insertGame("One player", String.valueOf(boardSize) + "x" + boardSize, InformationPanelAI.player1, InformationPanelAI.player2, "Draw", null, Float.parseFloat(ip.getTimeCount()));
         sql.closeConnection();
         turn = 0;
-        int i = JOptionPane.showConfirmDialog(Main.frame, "Draw! Time " + Float.parseFloat(InformationPanelAI.timeCount), "Game is finished", -1, 1);
+        int i = JOptionPane.showConfirmDialog(Main.frame, "Draw! Time " + Float.parseFloat(ip.getTimeCount()), "Game is finished", -1, 1);
         closeGame(i);
     }
 

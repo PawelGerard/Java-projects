@@ -24,16 +24,15 @@ public class InformationPanel extends JPanel {
     JLabel timeInfo;
     JLabel playerInfo;
     double count;
-    static String timeCount;
+    private String timeCount;
     JPanel timePanel;
-    JPanel playerPanel;
+	JPanel playerPanel;
     Image bg;
     URL bgURL = InformationPanel.class.getResource("/bg.png");
     public static String player1;
     public static String player2;
 
     public InformationPanel() {
-    	count = 0;
         try {
             bg = ImageIO.read(bgURL);
         }
@@ -48,14 +47,14 @@ public class InformationPanel extends JPanel {
         timeInfo = new JLabel("0.0");
         timeInfo.setFont(new Font("SansSerif", 3, 18));
         timeInfo.setForeground(Color.blue);
-        timePanel.add((Component)timeInfo, 0);
+        timePanel.add(timeInfo, 0);
         playerPanel = new JPanel();
         playerPanel.setLayout(new FlowLayout());
         playerPanel.setPreferredSize(new Dimension(500, 50));
         playerPanel.setOpaque(false);
         playerInfo = new JLabel();
         playerInfo.setFont(new Font("Impact", 0, 18));
-        playerPanel.add((Component)playerInfo, 0);
+        playerPanel.add(playerInfo, 0);
         add(timePanel);
         add(playerPanel);
         Timer t = new Timer(100, new ActionListener(){
@@ -63,7 +62,7 @@ public class InformationPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 count += 1.0;
-                timeCount = String.valueOf((double)Math.round(count * 10.0) / 100.0);
+                setTimeCount(String.valueOf((double)Math.round(count * 10.0) / 100.0));
                 timeInfo.setText(timeCount);
                 changePlayer(BoardPanel.turn);
             }
@@ -80,6 +79,15 @@ public class InformationPanel extends JPanel {
             playerInfo.setForeground(new Color(200, 10, 10));
         }
     }
+    
+    public String getTimeCount() {
+		return timeCount;
+	}
+
+	public void setTimeCount(String timeCount) {
+		this.timeCount = timeCount;
+	}
+
 
     @Override
     public void paintComponent(Graphics g) {

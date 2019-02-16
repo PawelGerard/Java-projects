@@ -41,7 +41,7 @@ public class MainPanel extends JPanel {
         createButton("History", "Graphics.HistoryPanel");
         createButton("Statistics", "Graphics.StatisticsPanel");
         createButton("Exit", "Exit");
-        add((Component)buttonPanel, 0);
+        add(buttonPanel, 0);
     }
 
     public void createButton(String name, String panelName) {

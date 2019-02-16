@@ -24,7 +24,7 @@ public class InformationPanelAI extends JPanel {
     JLabel timeInfo;
     JLabel playerInfo;
     double count;
-    static String timeCount;
+    private String timeCount;
     JPanel timePanel;
     JPanel playerPanel;
     Image bg;
@@ -33,7 +33,6 @@ public class InformationPanelAI extends JPanel {
     public static String player2;
 
     public InformationPanelAI() {
-    	count = 0;
         try {
             bg = ImageIO.read(bgURL);
         }
@@ -48,14 +47,14 @@ public class InformationPanelAI extends JPanel {
         timeInfo = new JLabel("0.0");
         timeInfo.setFont(new Font("SansSerif", 3, 18));
         timeInfo.setForeground(Color.blue);
-        timePanel.add((Component)timeInfo, 0);
+        timePanel.add(timeInfo, 0);
         playerPanel = new JPanel();
         playerPanel.setLayout(new FlowLayout());
         playerPanel.setPreferredSize(new Dimension(500, 50));
         playerPanel.setOpaque(false);
         playerInfo = new JLabel();
         playerInfo.setFont(new Font("Impact", 0, 18));
-        playerPanel.add((Component)playerInfo, 0);
+        playerPanel.add(playerInfo, 0);
         add(timePanel);
         add(playerPanel);
         Timer t = new Timer(100, new ActionListener(){
@@ -63,7 +62,7 @@ public class InformationPanelAI extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 count += 1.0;
-                timeCount = String.valueOf((double)Math.round(count * 10.0) / 100.0);
+                setTimeCount(String.valueOf((double)Math.round(count * 10.0) / 100.0));
                 timeInfo.setText(timeCount);
                 changePlayer(BoardPanelAI.turn);
             }
@@ -80,8 +79,16 @@ public class InformationPanelAI extends JPanel {
             playerInfo.setForeground(new Color(200, 10, 10));
         }
     }
+    
+    public String getTimeCount() {
+		return timeCount;
+	}
 
-    @Override
+	public void setTimeCount(String timeCount) {
+		this.timeCount = timeCount;
+	}
+
+	@Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(bg, 0, 0, null);

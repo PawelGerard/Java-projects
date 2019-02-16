@@ -33,7 +33,7 @@ public class HistoryPanel extends JPanel {
         table.setPreferredSize(new Dimension(480, 1500));
         scroll = new JScrollPane(table);
         scroll.setPreferredSize(new Dimension(480, 400));
-        add((Component)scroll, "North");
+        add(scroll, "North");
         sql = new SQL();
         dtm = (DefaultTableModel)table.getModel();
         dtm.setColumnIdentifiers(columnNames);
@@ -51,7 +51,7 @@ public class HistoryPanel extends JPanel {
                 Frame.panel.revalidate();
             }
         });
-        add((Component)button, "South");
+        add(button, "South");
     }
 
     public void setValuesInTable(DefaultTableModel dtm, List<Game> l) {

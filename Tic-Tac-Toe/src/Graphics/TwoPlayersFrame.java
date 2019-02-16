@@ -33,6 +33,7 @@ public class TwoPlayersFrame extends JFrame {
     JRadioButton r2;
     JRadioButton r3;
     JButton ok;
+    
 
     public TwoPlayersFrame() {
         super("Enter details");

@@ -42,6 +42,7 @@ public class BoardPanel extends JPanel {
     int limit;
     SQL sql;
     String winner;
+    InformationPanel ip;
 
     public BoardPanel() {
         setLayout(new BorderLayout());
@@ -52,7 +53,8 @@ public class BoardPanel extends JPanel {
 
             @Override
             public void windowClosed(WindowEvent e) {
-               add(new InformationPanel(), "North");
+            	ip = new InformationPanel();
+               add(ip, "North");
                add(panel, "South");
                createBoard();
             }
@@ -83,19 +85,19 @@ public class BoardPanel extends JPanel {
 
     public void win() {
         sql = new SQL();
-        sql.insertGame("Two players", String.valueOf(boardSize) + "x" + boardSize, InformationPanel.player1, InformationPanel.player2, "Victory", winner, Float.parseFloat(InformationPanel.timeCount));
+        sql.insertGame("Two players", String.valueOf(boardSize) + "x" + boardSize, InformationPanel.player1 , InformationPanel.player2, "Victory", winner, Float.parseFloat(ip.getTimeCount()));
         sql.closeConnection();
         turn = 0;
-        int i = JOptionPane.showConfirmDialog(Main.frame, String.valueOf(winner) + " Victory! Time " + Float.parseFloat(InformationPanel.timeCount), "Game is finished", -1, 1);
+        int i = JOptionPane.showConfirmDialog(Main.frame, String.valueOf(winner) + " Victory! Time " + Float.parseFloat(ip.getTimeCount()), "Game is finished", -1, 1);
         closeGame(i);
     }
 
     public void draw() {
         sql = new SQL();
-        sql.insertGame("Two players", String.valueOf(boardSize) + "x" + boardSize, InformationPanel.player1, InformationPanel.player2, "Draw", null, Float.parseFloat(InformationPanel.timeCount));
+        sql.insertGame("Two players", String.valueOf(boardSize) + "x" + boardSize, InformationPanel.player1, InformationPanel.player2, "Draw", null, Float.parseFloat(ip.getTimeCount()));
         sql.closeConnection();
         turn = 0;
-        int i = JOptionPane.showConfirmDialog(Main.frame, "Draw! Time " + Float.parseFloat(InformationPanel.timeCount), "Game is finished", -1, 1);
+        int i = JOptionPane.showConfirmDialog(Main.frame, "Draw! Time " + Float.parseFloat(ip.getTimeCount()), "Game is finished", -1, 1);
         closeGame(i);
     }
 
