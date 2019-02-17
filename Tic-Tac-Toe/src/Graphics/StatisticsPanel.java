@@ -24,7 +24,7 @@ public class StatisticsPanel extends JPanel {
         sql = new SQL();
         createLabel("Number of games:", String.valueOf(sql.getGameCount()));
         createLabel("Longest game:", String.valueOf(sql.getLongestGame()));
-        createLabel("Shorest game:", String.valueOf(sql.getShortestGame()));
+        createLabel("Shortest game:", String.valueOf(sql.getShortestGame()));
         createLabel("Circle's victories:", String.valueOf(sql.getCircleVictories()));
         createLabel("Cross's victories:", String.valueOf(sql.getCrossVictories()));
         createLabel("Best player:", String.valueOf(String.valueOf(sql.getBestPlayer())) + " wins");
