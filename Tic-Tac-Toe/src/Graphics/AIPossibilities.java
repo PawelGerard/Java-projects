@@ -1,6 +1,6 @@
 
 package Graphics;
-
+//AI
 public class AIPossibilities {
     private int firstX;
     private int firstY;
